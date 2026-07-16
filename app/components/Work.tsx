@@ -2,9 +2,9 @@
 import { useEffect, useRef, useState } from 'react';
 
 const videos = [
-  { src: '/videos/mango-gin-intro.mov',         label: 'Departed Spirits', sublabel: 'Mango Gin Intro' },
-  { src: '/videos/passionfruit-vodka-shots.mov', label: 'Departed Spirits', sublabel: 'Passionfruit Vodka Shots' },
-  { src: '/videos/salted-mango-mule.mov',        label: 'Departed Spirits', sublabel: 'Salted Mango Mule' },
+  { src: '/videos/mango-gin-intro.mp4',         label: 'Departed Spirits', sublabel: 'Mango Gin Intro' },
+  { src: '/videos/passionfruit-vodka-shots.mp4', label: 'Departed Spirits', sublabel: 'Passionfruit Vodka Shots' },
+  { src: '/videos/salted-mango-mule.mp4',        label: 'Departed Spirits', sublabel: 'Salted Mango Mule' },
   { src: '/videos/hard-rated.mp4',               label: 'Hard Rated',       sublabel: 'Brand film' },
   { src: '/videos/compressed-lift.mp4',          label: 'Departed Spirits', sublabel: 'Lift' },
   { src: '/videos/departed-reel-extra.mp4',      label: 'Handson Gloves',   sublabel: 'Meta campaign' },
