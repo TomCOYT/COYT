@@ -1,51 +1,29 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
+// ——— ADD NEW VIDEOS HERE ———
 const videos = [
-  { src: '/videos/mango-gin-intro.mp4',         label: 'Departed Spirits', sublabel: 'Mango Gin Intro' },
-  { src: '/videos/passionfruit-vodka-shots.mp4', label: 'Departed Spirits', sublabel: 'Passionfruit Vodka Shots' },
-  { src: '/videos/salted-mango-mule.mp4',        label: 'Departed Spirits', sublabel: 'Salted Mango Mule' },
+  { src: '/videos/mango-gin-intro.mp4',          label: 'Departed Spirits', sublabel: 'Mango Gin Intro' },
+  { src: '/videos/passionfruit-vodka-shots.mp4',  label: 'Departed Spirits', sublabel: 'Passionfruit Vodka Shots' },
+  { src: '/videos/salted-mango-mule.mp4',         label: 'Departed Spirits', sublabel: 'Salted Mango Mule' },
 ];
+// ——————————————————————————
 
 function VideoCard({ src, label, sublabel, onClick, index }: {
   src: string; label: string; sublabel: string; onClick: () => void; index: number;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    const el = cardRef.current;
-    const video = videoRef.current;
-    if (!el || !video) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.3 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  const handleMouseEnter = () => setHovered(true);
-  const handleMouseLeave = () => setHovered(false);
-
-  // Accent colors cycling
   const accents = ['rgba(0,181,181,0.7)', 'rgba(255,255,255,0.4)', 'rgba(0,181,181,0.5)', 'rgba(255,255,255,0.3)', 'rgba(0,181,181,0.6)'];
   const accent = accents[index % accents.length];
 
   return (
     <div
-      ref={cardRef}
       onClick={onClick}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
         width: 240,
         flexShrink: 0,
@@ -59,38 +37,29 @@ function VideoCard({ src, label, sublabel, onClick, index }: {
         borderColor: hovered ? '#00B5B5' : 'rgba(255,255,255,0.08)',
       }}
     >
-      {/* Placeholder — shows until video loads */}
+      {/* Placeholder */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 2,
         opacity: loaded ? 0 : 1, transition: 'opacity 300ms',
-        pointerEvents: loaded ? 'none' : 'auto',
+        pointerEvents: 'none',
         background: '#0A0A0A',
         display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
         padding: 20,
       }}>
-        <div>
-          {/* Index number */}
-          <span className="bebas" style={{ fontSize: 48, color: 'rgba(255,255,255,0.06)', lineHeight: 1 }}>
-            {String(index + 1).padStart(2, '0')}
-          </span>
-        </div>
-        {/* Bottom label */}
+        <span className="bebas" style={{ fontSize: 48, color: 'rgba(255,255,255,0.06)', lineHeight: 1 }}>
+          {String(index + 1).padStart(2, '0')}
+        </span>
         <div>
           <div style={{ width: 20, height: 1, background: accent, marginBottom: 10 }} />
-          <p className="sans" style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: 4 }}>
-            {label}
-          </p>
-          <p className="sans" style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.02em' }}>
-            {sublabel}
-          </p>
+          <p className="sans" style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: 4 }}>{label}</p>
+          <p className="sans" style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.02em' }}>{sublabel}</p>
         </div>
       </div>
 
       <video
         ref={videoRef}
         src={src}
-        muted loop playsInline preload="auto" autoPlay
-        onLoadedData={() => setLoaded(true)}
+        muted loop playsInline autoPlay
         onCanPlay={() => { setLoaded(true); videoRef.current?.play().catch(() => {}); }}
         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', position: 'relative', zIndex: 1 }}
       />
@@ -99,10 +68,9 @@ function VideoCard({ src, label, sublabel, onClick, index }: {
       <div style={{
         position: 'absolute', inset: 0, zIndex: 3,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: hovered ? 'rgba(0,0,0,0.25)' : 'rgba(0,0,0,0.5)',
+        background: hovered ? 'rgba(0,0,0,0.15)' : 'rgba(0,0,0,0.4)',
         transition: 'background 200ms',
       }}>
-        {/* Play icon */}
         <div style={{
           width: 48, height: 48,
           border: `1.5px solid ${hovered ? '#00B5B5' : 'rgba(255,255,255,0.5)'}`,
@@ -161,25 +129,19 @@ export default function Work() {
 
   return (
     <section id="work" style={{ background: '#ffffff', paddingTop: 120, paddingBottom: 80 }}>
-      {/* Header */}
       <div ref={headerRef} className="fade-up work-header" style={{ maxWidth: 1400, margin: '0 auto 48px', padding: '0 80px' }}>
         <p className="sans" style={{ fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#00B5B5', marginBottom: 16 }}>Work</p>
         <h2 className="bebas" style={{ fontSize: 'clamp(48px, 5vw, 72px)', color: '#121212', lineHeight: 0.95, marginBottom: 40 }}>
           BUILT TO PERFORM IN THE FEED.
         </h2>
 
-        {/* Context row */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', borderTop: '1px solid #E8E8E8', paddingTop: 28 }} className="work-context-row">
-          {/* Left: client context */}
           <div>
-            <p className="sans" style={{ fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#00B5B5', marginBottom: 6 }}>
-              Departed Spirits
-            </p>
+            <p className="sans" style={{ fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#00B5B5', marginBottom: 6 }}>Departed Spirits</p>
             <p className="sans" style={{ fontSize: 15, color: '#777777', maxWidth: 380, lineHeight: 1.6 }}>
               Short-form content directed, produced, and tested in the ad account.
             </p>
           </div>
-          {/* Right: three inline stats */}
           <div style={{ display: 'flex', gap: 40, flexShrink: 0 }}>
             {[
               { num: '400K', label: 'Monthly views' },
@@ -195,7 +157,7 @@ export default function Work() {
         </div>
       </div>
 
-      {/* Desktop: auto-scroll reel */}
+      {/* Desktop: infinite auto-scroll reel */}
       <div
         className="work-desktop"
         style={{ overflow: 'hidden', width: '100%' }}
