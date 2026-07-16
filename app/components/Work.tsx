@@ -79,7 +79,8 @@ function VideoCard({ src, label, sublabel, onClick, index }: {
         ref={videoRef}
         src={src}
         muted loop playsInline preload="auto" autoPlay
-        onCanPlay={() => setLoaded(true)}
+        onLoadedData={() => setLoaded(true)}
+        onCanPlay={() => { setLoaded(true); videoRef.current?.play().catch(() => {}); }}
         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', position: 'relative', zIndex: 1 }}
       />
 
