@@ -5,24 +5,36 @@ const videos = [
   { src: '/videos/mango-gin-intro.mp4',         label: 'Departed Spirits', sublabel: 'Mango Gin Intro' },
   { src: '/videos/passionfruit-vodka-shots.mp4', label: 'Departed Spirits', sublabel: 'Passionfruit Vodka Shots' },
   { src: '/videos/salted-mango-mule.mp4',        label: 'Departed Spirits', sublabel: 'Salted Mango Mule' },
-  { src: '/videos/departed-reel-extra.mp4',      label: 'Departed Spirits', sublabel: 'Meta campaign' },
 ];
 
 function VideoCard({ src, label, sublabel, onClick, index }: {
   src: string; label: string; sublabel: string; onClick: () => void; index: number;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
-  const handleMouseEnter = () => {
-    setHovered(true);
-    videoRef.current?.play().catch(() => {});
-  };
-  const handleMouseLeave = () => {
-    setHovered(false);
-    if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; }
-  };
+  useEffect(() => {
+    const el = cardRef.current;
+    const video = videoRef.current;
+    if (!el || !video) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  const handleMouseEnter = () => setHovered(true);
+  const handleMouseLeave = () => setHovered(false);
 
   // Accent colors cycling
   const accents = ['rgba(0,181,181,0.7)', 'rgba(255,255,255,0.4)', 'rgba(0,181,181,0.5)', 'rgba(255,255,255,0.3)', 'rgba(0,181,181,0.6)'];
@@ -30,6 +42,7 @@ function VideoCard({ src, label, sublabel, onClick, index }: {
 
   return (
     <div
+      ref={cardRef}
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
