@@ -66,22 +66,6 @@ export default function Footer() {
             >
               tom@coyt.com.au
             </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                fontFamily: 'var(--font-inter)',
-                fontSize: 14,
-                color: 'rgba(255,255,255,0.5)',
-                textDecoration: 'none',
-                transition: 'color 150ms',
-              }}
-              onMouseEnter={e => e.currentTarget.style.color = '#ffffff'}
-              onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}
-            >
-              LinkedIn
-            </a>
           </div>
         </div>
 
