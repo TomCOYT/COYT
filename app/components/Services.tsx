@@ -15,6 +15,7 @@ function ServiceRow({ num, name, desc }: { num: string; name: string; desc: stri
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      className="service-row"
       style={{
         display: 'flex',
         alignItems: 'baseline',
@@ -27,8 +28,8 @@ function ServiceRow({ num, name, desc }: { num: string; name: string; desc: stri
       }}
     >
       <span className="bebas" style={{ fontSize: 13, color: '#00B5B5', letterSpacing: '0.1em', flexShrink: 0, width: 28 }}>{num}</span>
-      <span className="bebas" style={{ fontSize: 28, color: hovered ? '#00B5B5' : '#121212', flex: 1, lineHeight: 1, letterSpacing: '0.01em', transition: 'color 200ms' }}>{name}</span>
-      <span className="sans" style={{ fontSize: 14, color: '#777777', maxWidth: 400, textAlign: 'right', lineHeight: 1.6, flexShrink: 0 }}>{desc}</span>
+      <span className="bebas service-name" style={{ fontSize: 28, color: hovered ? '#00B5B5' : '#121212', flex: 1, lineHeight: 1, letterSpacing: '0.01em', transition: 'color 200ms' }}>{name}</span>
+      <span className="sans service-desc" style={{ fontSize: 14, color: '#777777', maxWidth: 400, textAlign: 'right', lineHeight: 1.6, flexShrink: 0 }}>{desc}</span>
     </div>
   );
 }
@@ -72,8 +73,9 @@ export default function Services() {
       <style>{`
         @media (max-width: 768px) {
           .services-section { padding: 80px 24px !important; }
-          .services-section [style*="maxWidth: 400px"] { display: none; }
-          .services-section [style*="max-width: 400px"] { display: none; }
+          .service-desc { display: none !important; }
+          .service-row { gap: 16px !important; padding: 20px 0 !important; }
+          .service-name { font-size: 22px !important; }
         }
       `}</style>
     </section>

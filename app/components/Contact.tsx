@@ -139,7 +139,7 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                <div className="contact-name-email" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                   <input
                     name="name"
                     placeholder="Name"
@@ -231,7 +231,8 @@ export default function Contact() {
       <style>{`
         @media (max-width: 768px) {
           .contact-section { padding: 80px 24px !important; }
-          .contact-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+          .contact-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .contact-name-email { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>

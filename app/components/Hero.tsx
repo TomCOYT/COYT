@@ -3,9 +3,9 @@
 export default function Hero() {
   return (
     <section style={{ minHeight: '100vh', background: '#ffffff', paddingTop: 68, display: 'flex', alignItems: 'center' }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', width: '100%', padding: '80px 80px' }}>
+      <div className="hero-inner" style={{ maxWidth: 1400, margin: '0 auto', width: '100%', padding: '80px 80px' }}>
 
-        <h1 className="bebas" style={{ fontSize: 'clamp(64px, 9.5vw, 130px)', lineHeight: 0.93, letterSpacing: '-0.01em', color: '#121212', marginBottom: 36, maxWidth: 800 }}>
+        <h1 className="bebas hero-h1" style={{ fontSize: 'clamp(56px, 9.5vw, 130px)', lineHeight: 0.93, letterSpacing: '-0.01em', color: '#121212', marginBottom: 36, maxWidth: 800 }}>
           THE SYSTEM
           <br />
           BEHIND SCALING
@@ -13,11 +13,11 @@ export default function Hero() {
           BRANDS.
         </h1>
 
-        <p className="sans" style={{ fontSize: 18, color: '#777777', lineHeight: 1.7, maxWidth: 560, marginBottom: 44 }}>
+        <p className="sans hero-sub" style={{ fontSize: 18, color: '#777777', lineHeight: 1.7, maxWidth: 560, marginBottom: 44 }}>
           Meta ads, Google ads, Klaviyo, and the creative that makes all of it work. One team. Full stack. No handoffs.
         </p>
 
-        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+        <div className="hero-ctas" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
           <a
             href="#contact"
             className="pulse-cta sans"
@@ -42,7 +42,9 @@ export default function Hero() {
 
       <style>{`
         @media (max-width: 768px) {
-          section { padding-left: 24px !important; padding-right: 24px !important; padding-top: 48px !important; }
+          .hero-inner { padding: 60px 24px !important; }
+          .hero-sub { font-size: 16px !important; }
+          .hero-ctas a { width: 100%; text-align: center; box-sizing: border-box; }
         }
       `}</style>
     </section>

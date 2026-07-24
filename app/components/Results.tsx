@@ -339,6 +339,7 @@ export default function Results() {
         }
         @media (max-width: 600px) {
           .results-what-grid { grid-template-columns: 1fr !important; }
+          .count-num { font-size: 48px !important; }
         }
       `}</style>
     </section>

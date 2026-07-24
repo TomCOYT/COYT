@@ -25,7 +25,7 @@ function VideoCard({ src, label, sublabel, onClick, index }: {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        width: 240,
+        width: '100%',
         flexShrink: 0,
         aspectRatio: '9/16',
         border: '1px solid rgba(255,255,255,0.08)',
@@ -169,7 +169,9 @@ export default function Work() {
           style={{ display: 'flex', gap: 12, width: 'max-content', padding: '0 80px' }}
         >
           {[...videos, ...videos].map((v, i) => (
-            <VideoCard key={i} src={v.src} label={v.label} sublabel={v.sublabel} index={i % videos.length} onClick={() => setLightboxSrc(v.src)} />
+            <div key={i} style={{ width: 240, flexShrink: 0, aspectRatio: '9/16' }}>
+              <VideoCard src={v.src} label={v.label} sublabel={v.sublabel} index={i % videos.length} onClick={() => setLightboxSrc(v.src)} />
+            </div>
           ))}
         </div>
       </div>
@@ -177,7 +179,7 @@ export default function Work() {
       {/* Mobile: horizontal snap scroll */}
       <div className="work-mobile reel-mobile" style={{ padding: '0 24px' }}>
         {videos.map((v, i) => (
-          <div key={i} className="reel-mobile-card" style={{ width: 200, flexShrink: 0, aspectRatio: '9/16' }}>
+          <div key={i} className="reel-mobile-card" style={{ width: 'min(220px, 65vw)', flexShrink: 0, aspectRatio: '9/16' }}>
             <VideoCard src={v.src} label={v.label} sublabel={v.sublabel} index={i} onClick={() => setLightboxSrc(v.src)} />
           </div>
         ))}

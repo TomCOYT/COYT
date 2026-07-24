@@ -58,8 +58,8 @@ export default function About() {
                   borderBottom: '1px solid #E8E8E8',
                 }}
               >
-                <span className="bebas" style={{ fontSize: 48, color: '#121212', lineHeight: 1 }}>{row.value}</span>
-                <span className="sans" style={{ fontSize: 13, color: '#AAAAAA', textAlign: 'right', maxWidth: 220, lineHeight: 1.45 }}>{row.label}</span>
+                <span className="bebas about-stat-val" style={{ fontSize: 48, color: '#121212', lineHeight: 1 }}>{row.value}</span>
+                <span className="sans about-stat-label" style={{ fontSize: 13, color: '#AAAAAA', textAlign: 'right', maxWidth: 220, lineHeight: 1.45 }}>{row.label}</span>
               </div>
             ))}
           </div>
@@ -70,6 +70,8 @@ export default function About() {
         @media (max-width: 768px) {
           .about-section { padding: 80px 24px !important; }
           .about-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+          .about-stat-val { font-size: 36px !important; }
+          .about-stat-label { font-size: 12px !important; max-width: 160px !important; }
         }
       `}</style>
     </section>
